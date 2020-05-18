@@ -7,6 +7,9 @@ import reducers from './ducks/rootReducer';
 const persistConfig = {
     key: 'root',
     storage,
+    whiteList: [
+      'user'
+    ]
   };
   
   const persistedReducer = persistReducer(persistConfig, reducers);

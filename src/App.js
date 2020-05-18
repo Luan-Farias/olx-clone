@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
+import Routes from './routes';
 
 function App(props) {
   return (
-    <div />
+    <Routes />
   );
 }
 
