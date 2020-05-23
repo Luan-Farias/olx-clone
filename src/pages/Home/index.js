@@ -1,14 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-import { Container } from './styles';
+import { PageArea, SearchArea } from './styles';
+import { PageContainer } from '../../components/MainComponents';
+import useApi from '../../helpers/OlxAPI';
+export default function SignIn() {
+    const api = useApi();
 
-export default function Home() {
     return (
-        <Container>
-            <h1>Página Home</h1>
-            <Link to="/about">Sobre</Link>
-        </Container>
+        <>
+            <SearchArea>
+                <PageContainer>
+                    <div className='searchBox'>
+                        <form method="GET" action="/ads">
+                            <input name="q" type="text" placeholder="O que você procura?" />
+                            <select name="state">
+
+                            </select>
+                            <button>Pesquisar</button>
+                        </form>
+                    </div>
+                    <div className='categoryList'></div>
+                </PageContainer>
+            </SearchArea>
+            
+            <PageContainer>
+                <PageArea>
+                    ...
+                </PageArea>
+            </PageContainer>
+        </>
     );
 }
-

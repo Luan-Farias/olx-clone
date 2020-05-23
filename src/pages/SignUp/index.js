@@ -126,9 +126,6 @@ export default function SignIn() {
                         </div>
                     </label>
                 </form>
-                <div>
-                    
-                </div>
             </PageArea>
         </PageContainer>
     );
