@@ -26,10 +26,6 @@ form {
             flex: 1;
             display: flex;
 
-            &#checkbox--area {
-                justify-content: start;
-            }
-
             &.submit {
                 justify-content: center;
             }

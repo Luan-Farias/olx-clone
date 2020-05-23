@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { PageArea } from './styles';
 import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents';
@@ -7,35 +7,79 @@ import { doLogin } from '../../helpers/AuthHandler';
 
 export default function SignIn() {
     const api = useApi();
+    const [name, setName] = useState('');
+    const [stateLoc, setStateLoc] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberPassword, setRememberPassword] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
+
+    const [stateList, setStateList] = useState([]);
+
+    useEffect(()=>{
+        const getStates = async () => {
+            const slist = await api.getStates();
+
+            setStateList(slist);
+        }
+
+        getStates();
+    }, [api]);
 
     async function handleSubmit(e) {
         e.preventDefault();
         setDisabled(true);
+
         setError('');
 
-        const json = await api.login(email, password);
+        if(password !== confirmPassword) {
+            setError('Senhas não coincidem');
+            setDisabled(false);
+            return;
+        }
+        const json = await api.register(name, email, password, stateLoc);
 
         if (json.error) {
             setError(json.error);
-            setDisabled(false);
         } else {
-            doLogin(json.token, rememberPassword)
+            doLogin(json.token)
             window.location.href = '/';
         }
     }
 
     return (
         <PageContainer>
-            <PageTitle>Login</PageTitle>
+            <PageTitle>Cadastro</PageTitle>
             <PageArea>
     {error && <ErrorMessage>{error}</ErrorMessage>}
 
                 <form onSubmit={handleSubmit}>
+                    <label className="area">
+                        <div className="area--title">Nome Completo</div>
+                        <div className="area--input">
+                            <input 
+                                value={name} 
+                                onChange={e => 
+                                setName(e.target.value)} 
+                                type="text" 
+                                disabled={disabled} 
+                                required
+                            />
+                        </div>
+                    </label>
+
+                    <label className="area">
+                        <div className="area--title">Estado</div>
+                        <div className="area--input">
+                            <select required value={stateLoc} onChange={e => setStateLoc(e.target.value)}>
+                                <option></option>
+                                {stateList.map((i, k) => <option value={i.id} key={k}>{i.name}</option>)}
+                            </select>
+                        </div>
+                    </label>
+
                     <label className="area">
                         <div className="area--title">E-mail</div>
                         <div className="area--input">
@@ -64,21 +108,21 @@ export default function SignIn() {
                     </label>
 
                     <label className="area">
-                        <div className="area--title">Lembrar Senha</div>
+                        <div className="area--title">Confirmar senha</div>
                         <div className="area--input">
                             <input 
-                                checked={rememberPassword} 
-                                onChange={() => setRememberPassword(!rememberPassword)} 
-                                type="checkbox" 
-                                disabled={disabled}
-                                id="checkbox" 
+                                value={confirmPassword} 
+                                onChange={e => setConfirmPassword(e.target.value)} 
+                                type="password" 
+                                disabled={disabled} 
+                                required
                             />
                         </div>
                     </label>
                     
                     <label className="area">
                         <div className="area--input submit">
-                            <button disabled={disabled}>Fazer login</button>
+                            <button disabled={disabled}>Fazer Cadastro</button>
                         </div>
                     </label>
                 </form>
