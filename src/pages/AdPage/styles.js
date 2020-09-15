@@ -10,17 +10,15 @@ export const PageArea = styled.div`
     margin-top: 20px;
 
     .box {
-        background-color: #FFF;
+        background-color: #fff;
         border-radius: 5px;
         box-shadow: 0px 0px 4px #999;
         margin-bottom: 20px;
-
     }
 
     .boxPadding {
         padding: 10px;
     }
-
 
     .leftSide {
         flex: 1;
@@ -30,7 +28,7 @@ export const PageArea = styled.div`
             display: flex;
         }
 
-        .adImage{
+        .adImage {
             width: 320px;
             height: 320px;
             margin-right: 20px;
@@ -61,7 +59,6 @@ export const PageArea = styled.div`
             }
 
             .adDescription {
-
                 small {
                     color: #999;
                 }
@@ -73,7 +70,7 @@ export const PageArea = styled.div`
         width: 250px;
 
         .price span {
-            color: #00F;
+            color: #00f;
             display: block;
             font-size: 27px;
             font-weight: bold;
@@ -81,7 +78,7 @@ export const PageArea = styled.div`
 
         .contactSellerLink {
             background-color: #007bff;
-            color: #FFF;
+            color: #fff;
             height: 30px;
             border-radius: 5px;
             box-shadow: 0px 0px 4px #999;
@@ -93,7 +90,6 @@ export const PageArea = styled.div`
         }
 
         .createdBy {
-
             strong {
                 display: block;
             }
@@ -104,5 +100,32 @@ export const PageArea = styled.div`
                 margin-top: 10px;
             }
         }
+    }
+`;
+
+export const OthersArea = styled.div`
+    h2 {
+        font-size: 20px;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+
+        .adItem {
+            max-width: 25%;
+        }
+    }
+`;
+
+export const BreadCrumb = styled.div`
+    font-size: 13px;
+    margin-top: 20px;
+
+    a {
+        display: inline-block;
+        margin: 0 5px;
+        text-decoration: underline;
+        color: #000;
     }
 `;
