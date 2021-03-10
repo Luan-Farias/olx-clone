@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AdPage from './pages/AdPage';
 import NotFound from './pages/NotFound';
+import AddAd from './pages/AddAd';
 
 const Routes = () => (
     <Switch>
@@ -16,7 +17,7 @@ const Routes = () => (
         <RouteHandler exact path='/signin' component={SignIn} />
         <RouteHandler exact path='/signup' component={SignUp} />
         <RouteHandler exact path='/ads/:id' component={AdPage} />
-        <RouteHandler private exact path='/post-an-ad' />
+        <RouteHandler private exact path='/post-an-ad' component={AddAd} />
         <RouteHandler component={NotFound} />
     </Switch>
 );

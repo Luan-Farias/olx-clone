@@ -3,8 +3,9 @@ import Cookies from 'js-cookie';
 export const isLogged = () => {
     let token = Cookies.get('token');
 
-    return token? true : false;
-}
+    console.log(token);
+    return token ? true : false;
+};
 
 export const doLogin = (token, rememberPassword = false) => {
     if (rememberPassword) {
@@ -12,8 +13,8 @@ export const doLogin = (token, rememberPassword = false) => {
     } else {
         Cookies.set('token', token);
     }
-}
+};
 
 export const doLogout = () => {
     Cookies.remove('token');
-}
+};
